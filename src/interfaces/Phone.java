@@ -1,10 +1,8 @@
 package interfaces;
 
 public interface Phone {
-  void makecall(String phoneNumber);
-  void answerCall();
-  void endCall();
-  void sendTextMessage(String phoneNumber, String message);
-  void receiveTextMessage(String sender, String message);
+  String makeCall(String phoneNumber);
+  String answerCall(String phoneNumber);
+  String sendTextMessage(String phoneNumber, String textMessage, String feedbackMessage);
   void startVoicemail();
 }

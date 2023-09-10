@@ -6,6 +6,4 @@ public interface InternetBrowser {
   void addNewTab();
   void viewHistory();
   void clearHistory();
-  void addFavorite(String pageUrl);
-  void removeFavorite(String pageUrl);
 }

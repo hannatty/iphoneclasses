@@ -11,14 +11,15 @@ public abstract class DefaultIphone {
   private Boolean dualChip = true;
 
 
-  // Constructor
+  //#region Constructor
   public DefaultIphone(Color color, PhoneModel phoneModel, SimCard simCard) {
     this.color = color;
     this.phoneModel = phoneModel;
     this.simCard = simCard;
   }
+  //#endregion
 
-  // Getters and setters 
+  //#region Getters and setters 
     public Color getColor() {
         return color;
     }
@@ -50,5 +51,7 @@ public abstract class DefaultIphone {
     public boolean isDualChip() {
       return dualChip;
     }
+  //#endregion
+
 
 };
