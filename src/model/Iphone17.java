@@ -3,6 +3,7 @@ import interfaces.Phone;
 import interfaces.InternetBrowser;
 import interfaces.MusicPlayer;
 
+import java.lang.reflect.Array;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -47,9 +48,40 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
   //#endregion
 
   //#region Music Player Methods
+
+  //Playlists Disponíveis
+  String pop[] = {"Brisa - Iza", "Homem Primata - Titãs", "Doce Vampiro - Rita Lee"};
+  String forro[] = {"Cenário de Amor - Petrúcio Amorim", "Coração - Saia Rodada", "Asa Branca - Luiz Gonzaga"};
+  String mpb[] = {"Por Supuesto - Marina Senna", "Ó Bixinho - Duda Beat", "Mulher do fim do mundo - Elza Soares"};
+  String[][] playlists = {pop, forro, mpb };
+
+
   @Override
-  public void playMusic() {
-    throw new UnsupportedOperationException("Unimplemented method 'playMusic'");
+  public String playMusic(String message) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Qual Playlist deseja ouvir?\nPop - DIGITE 1\nForró - DIGITE 2\nMpb - DIGITE 3");
+    int option = scanner.nextInt();
+    
+    if(option == 1){
+      message = ("Tocando música " + pop[0] + ". Deseja adiantar para a próxima música? Se sim, digite S. Ou digite N para permanecer nessa música.");
+      String nextMusic = scanner.toString();
+      if (nextMusic == "S"){
+        message = ("Tocando música " + pop[1] + " - 
+        \nOUTRAS OPÇÕES:
+        \n 1- Pular para próxima música
+        \n 2 - Pausar Música
+        \n 3 - ");
+      }
+    } else if (option == 2) {
+
+    } else if (option == 3) {
+
+    } else {
+      message = ("Opção inválida.");
+    }
+    
+    scanner.close();
+    return message;
   }
 
   @Override
@@ -58,19 +90,41 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
   }
 
   @Override
-  public void selectMusic() {
-    throw new UnsupportedOperationException("Unimplemented method 'selectMusic'");
-  }
+  public String selectMusic(String message) {
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("Qual Playlist deseja ouvir?\nPop - DIGITE 1\nForró - DIGITE 2\nMpb - DIGITE 3");
+    int option = scanner.nextInt();
 
-  @Override
-  public void nextTrack() {
-    throw new UnsupportedOperationException("Unimplemented method 'nextTrack'");
-  }
+    if (option == 1){
+      for(int music=0; music < pop.length; music++){
+        System.out.println( music + " - " + pop[music]);
+      }
+      System.out.println("Digite o número correspondente a música que deseja: ");
+      int musicChoice = scanner.nextInt();
+      message = ("Tocando " + pop[musicChoice]);
 
-  @Override
-  public void previousTrack() {
-    throw new UnsupportedOperationException("Unimplemented method 'previousTrack'");
-  }
+    } else if (option == 2) {
+      for(int music=0; music < forro.length; music++){
+        System.out.println( music + " - " + forro[music]);
+      }
+      System.out.println("Digite o número correspondente a música que deseja: ");
+      int musicChoice = scanner.nextInt();
+      message = ("Tocando " + forro[musicChoice]);
+
+    } else if (option == 3){
+      for(int music=0; music < mpb.length; music++){
+        System.out.println( music + " - " + mpb[music]);
+      }
+      System.out.println("Digite o número correspondente a música que deseja: ");
+      int musicChoice = scanner.nextInt();
+      message = ("Tocando " + mpb[musicChoice]);
+
+    } else {
+      System.out.println("Opção inválida.");
+    }
+    scanner.close();
+    return message;
+  };
   //#endregion
 
   //#region Phone Methods
@@ -85,11 +139,11 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
 
 
   public static int generatingRandomPhone() {
-        Random random = new Random();
-        int minNumber = 900_000_001;
-        int maxNumber = 999_999_999; 
+    Random random = new Random();
+    int minNumber = 900_000_001;
+    int maxNumber = 999_999_999; 
 
-        return random.nextInt(maxNumber - minNumber + 1) + minNumber;
+    return random.nextInt(maxNumber - minNumber + 1) + minNumber;
     }
 
   @Override
