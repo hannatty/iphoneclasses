@@ -10,11 +10,11 @@ import java.util.Scanner;
 import enums.Color;
 import enums.PhoneModel;
 import enums.SimCard;
-public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, InternetBrowser {
+public class Iphone12 extends DefaultIphone implements Phone, MusicPlayer, InternetBrowser {
 
 
   //#region Constructor
-  public Iphone17(Color color, PhoneModel phoneModel, SimCard simCard) {
+  public Iphone12(Color color, PhoneModel phoneModel, SimCard simCard) {
     super(color, phoneModel, simCard);
   }
   //#endregion
@@ -57,40 +57,30 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
 
 
   @Override
-  public String playMusic(String message) {
+  public String playMusic (String selectedMusic) {
+    System.out.println(" ***** Tocando " + selectedMusic + " *****");
+
     Scanner scanner = new Scanner(System.in);
-    System.out.println("Qual Playlist deseja ouvir?\nPop - DIGITE 1\nForró - DIGITE 2\nMpb - DIGITE 3");
-    int option = scanner.nextInt();
-    
-    if(option == 1){
-      message = ("Tocando música " + pop[0] + ". Deseja adiantar para a próxima música? Se sim, digite S. Ou digite N para permanecer nessa música.");
-      String nextMusic = scanner.toString();
-      if (nextMusic == "S"){
-        message = ("Tocando música " + pop[1] + " - 
-        \nOUTRAS OPÇÕES:
-        \n 1- Pular para próxima música
-        \n 2 - Pausar Música
-        \n 3 - ");
-      }
-    } else if (option == 2) {
-
-    } else if (option == 3) {
-
-    } else {
-      message = ("Opção inválida.");
-    }
-    
+    System.out.println("---- PARA PAUSAR DIGITE P");
+    String pause_option = scanner.toString().toUpperCase();
     scanner.close();
-    return message;
+
+    if (pause_option.equals("P")){
+      return pauseMusic(selectedMusic);
+    } else {
+      return "Opção Inválida."; 
+    }
+   
   }
 
   @Override
-  public void pauseMusic() {
-    throw new UnsupportedOperationException("Unimplemented method 'pauseMusic'");
+  public String pauseMusic(String pauseMessage) {
+    pauseMessage = "Música foi pausada.";
+    return pauseMessage;
   }
 
   @Override
-  public String selectMusic(String message) {
+  public String selectMusic(String selectedMusic) {
     Scanner scanner = new Scanner(System.in);
     System.out.println("Qual Playlist deseja ouvir?\nPop - DIGITE 1\nForró - DIGITE 2\nMpb - DIGITE 3");
     int option = scanner.nextInt();
@@ -101,7 +91,7 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
       }
       System.out.println("Digite o número correspondente a música que deseja: ");
       int musicChoice = scanner.nextInt();
-      message = ("Tocando " + pop[musicChoice]);
+      selectedMusic = pop[musicChoice];
 
     } else if (option == 2) {
       for(int music=0; music < forro.length; music++){
@@ -109,7 +99,7 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
       }
       System.out.println("Digite o número correspondente a música que deseja: ");
       int musicChoice = scanner.nextInt();
-      message = ("Tocando " + forro[musicChoice]);
+      selectedMusic = forro[musicChoice];
 
     } else if (option == 3){
       for(int music=0; music < mpb.length; music++){
@@ -117,13 +107,13 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
       }
       System.out.println("Digite o número correspondente a música que deseja: ");
       int musicChoice = scanner.nextInt();
-      message = ("Tocando " + mpb[musicChoice]);
+      selectedMusic = mpb[musicChoice];
 
     } else {
       System.out.println("Opção inválida.");
     }
     scanner.close();
-    return message;
+    return playMusic(selectedMusic);;
   };
   //#endregion
 
@@ -195,6 +185,7 @@ public class Iphone17 extends DefaultIphone implements Phone, MusicPlayer, Inter
   public void startVoicemail() {
     System.out.println("Correio de voz iniciando...");;
   }
+
 
 
   //#endregion

@@ -1,7 +1,7 @@
 package interfaces;
 
 public interface MusicPlayer {
-  String playMusic(String message);
-  void pauseMusic();
-  String selectMusic(String message);
+  String selectMusic(String selectedMusic);
+  String playMusic(String selectedMusic);
+  String pauseMusic(String pauseMessage);
 }
