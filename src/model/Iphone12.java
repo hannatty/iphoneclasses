@@ -3,6 +3,8 @@ import interfaces.Phone;
 import interfaces.InternetBrowser;
 import interfaces.MusicPlayer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,6 +12,9 @@ import enums.Color;
 import enums.PhoneModel;
 import enums.SimCard;
 public class Iphone12 extends DefaultIphone implements Phone, MusicPlayer, InternetBrowser {
+  List<String> tabs = new ArrayList<>();
+  List<String> history = new ArrayList<String>(); 
+
 
 
   //#region Constructor
@@ -19,29 +24,66 @@ public class Iphone12 extends DefaultIphone implements Phone, MusicPlayer, Inter
   //#endregion
 
   //#region Internet Browser Methods
+
   @Override
-  public void showPage() {
-    throw new UnsupportedOperationException("Unimplemented method 'showPage'");
+  public void showPage(String url) {
+    if (url.length() > 8){
+      history.add(url);
+      System.out.println("********************************");
+      System.out.println("Exibindo página " + url);
+
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Você está na página " + url + "\nPARA ATUALIZAR A URL - DIGITE 1");
+      int updateOption = scanner.nextInt();
+      scanner.close();
+      
+      if (updateOption == 1) {
+          updatePage();
+      } else {
+          System.out.println("Você permanece na página " + url);
+      }
+
+    } else {
+      System.out.println("URL Inválida");
+    }
   }
 
   @Override
   public void updatePage() {
-    throw new UnsupportedOperationException("Unimplemented method 'updatePage'");
+    Scanner scanner = new Scanner(System.in);
+    System.out.println("DIGITE A NOVA URL que deseja acessar: ");
+    String newUrl = scanner.nextLine();
+    scanner.close();
+
+    showPage(newUrl);
   }
 
   @Override
-  public void addNewTab() {
-    throw new UnsupportedOperationException("Unimplemented method 'addNewTab'");
+  public void addNewTab(String url) {
+    tabs.add(url);
+    System.out.println("Nova aba adicionada com a URL: " + url);
+  }
+ 
+  @Override   
+  public void showTabs() {
+    System.out.println("Abas abertas:");
+    for (int i = 0; i < tabs.size(); i++) {
+      System.out.println((i + 1) + ". " + tabs.get(i));
+    }
   }
 
   @Override
-  public void viewHistory() {
-    throw new UnsupportedOperationException("Unimplemented method 'viewHistory'");
+  public void showHistory() {
+    System.out.println("HISTÓRICO DE NAVEGAÇÃO:");
+    for (int i = 0; i < history.size(); i++) {
+      System.out.println((i + 1) + ". " + history.get(i));
+    }
   }
 
   @Override
   public void clearHistory() {
-    throw new UnsupportedOperationException("Unimplemented method 'clearHistory'");
+    history.clear();
+    System.out.println("Histórico de navegação removido.");
   }
 
   //#endregion
@@ -112,7 +154,7 @@ public class Iphone12 extends DefaultIphone implements Phone, MusicPlayer, Inter
       System.out.println("Opção inválida.");
     }
     scanner.close();
-    return playMusic(selectedMusic);;
+    return playMusic(selectedMusic);
   };
   //#endregion
 
